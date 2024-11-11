@@ -20,7 +20,7 @@ public class homePageTest {
         driver.get("https://ghostinspector.com/");
        // driver.manage().window().maximize();
 
-        driver.manage().wait(20000);
+      //  driver.manage().wait(20000);
         homePG = new homePage(driver);
     }
 

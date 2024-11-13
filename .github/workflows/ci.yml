@@ -1,0 +1,33 @@
+name: Java CI with JUnit 5
+
+# Trigger the workflow on every push to the master or main branch and on pull requests
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up JDK 11 (or any version of Java you are using)
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+
+      # Step 3: Build the project using Maven
+      - name: Build with Maven
+        run: mvn clean install
+
+      # Step 4: Run JUnit 5 tests using Maven
+      - name: Run JUnit 5 Tests
+        run: mvn test

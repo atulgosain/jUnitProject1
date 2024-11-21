@@ -14,6 +14,9 @@ public class homePage extends basePage{
     @FindBy(linkText = "Pricing")
     private WebElement pricingLink;
 
+    @FindBy(linkText = "Login")
+    private WebElement loginLink;
+
     @FindBy(css = "a.btn-cta") // Example for a CTA button
     private WebElement getStartedButton;
 
@@ -28,5 +31,8 @@ public class homePage extends basePage{
 
     public void clickGetStartedButton() {
         getStartedButton.click();
+    }
+    public void clickLoginLink(){
+        loginLink.click();
     }
 }

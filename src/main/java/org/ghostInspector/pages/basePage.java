@@ -10,7 +10,14 @@ public class basePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-public String getPageTitle(){
+
+    public basePage() {
+    }
+
+    public String getPageTitle(){
         return  driver.getTitle();
     }
+
+
+
 }

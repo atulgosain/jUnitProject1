@@ -11,6 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
@@ -47,20 +48,60 @@ public class HomePageTest {
         takeScreenShot("titleCheck");
         assertEquals(expectedTitle, actualTitle, "Page title does not match");
 
+
         //test the window of Feature link
-        WebElement featurelink = driver.findElement(By.linkText("Features")) ;
+        WebElement features = driver.findElement(By.linkText("Features"));
+
+//WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li[@id='menu-item-602']")));
+        //  WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@id='menu-item-602']")));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Features")));
+
+        // Perform the hover action
         Actions action = new Actions(driver);
+        action.moveToElement(element).perform();
 
-        action.moveToElement(featurelink).perform();
+        //Locate the dropdownItems(element1)
+        WebElement element1 = wait.until(ExpectedConditions.presenceOfElementLocated
+                (By.xpath("//li[@id='menu-item-602']//a[contains(@class, 'dropdown-item')]")));
 
+        // Assume 'element' is already located
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
+        // Get the text content of the element
+        String text = (String) jsExecutor.executeScript("return arguments[0].textContent;", element1);
+        System.out.println("TEXT NAME: " + text.trim());
+
+        // Click the element using JavaScript
+        jsExecutor.executeScript("arguments[0].click();", element1);
+
+        System.out.println("Title of the window: "+driver.getTitle());
+        // ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", features);
+     //   features.click();
+
+
+      //  WebElement featureLink = driver.findElement(By.xpath("//li[@id='menu-item-602']//a[@class=' dropdown-item']"));
+        //  System.out.println( "featureLink: "+ featureLink.getTagName());
+       // WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+       // element.click();
+
+       // ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", featureLink);
+       // featureLink.click();
+
+        //WebElement link = driver.findElement(By.xpath("//li[@id='menu-item-602']//a[@class='dropdown-item']"));
+        //link.click();
+
+       
+   /*     //class="ekit-menu-nav-link ekit-menu-dropdown-toggle">
 // Find all iframes on the page
-        List<WebElement> frames = driver.findElements(By.tagName("iframe"));
+    //    List<WebElement> frames = driver.findElements(By.tagName("iframe"));
 
         // Print the number of frames found
-        System.out.println("Total number of frames: " + frames.size());
+      //  System.out.println("Total number of frames: " + frames.size());
 
         // Print the name or ID of each frame
-        for (WebElement frame : frames) {
+     ///   for (WebElement frame : frames) {
          //   String nameOrId = frame.getAttribute("name") != null ? frame.getAttribute("name") : frame.getAttribute("id");
           //  System.out.println("Frame Name/ID: " + nameOrId);
         int i = 0;
@@ -68,6 +109,7 @@ public class HomePageTest {
             String xpath = generateXPath(frame, "");
             System.out.println("Frame " + (i + 1) + " XPath: " + xpath);
         }
+        */
 
 ////*[@id="menu-item-600"]/div/div/section/div/div/div/section[1]/div/div[2]/div/div/div/p
 
